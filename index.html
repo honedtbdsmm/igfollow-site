@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IGFollow — Social Media Services</title>
+<meta name="description" content="IGFollow social media marketing services and customer support.">
+<style>
+:root{--bg:#0b1020;--panel:#121a30;--line:#25314e;--text:#f5f7ff;--muted:#a8b3ce;--accent:#7c5cff;--accent2:#25d5ab}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(ellipse at top,#192348 0,#0b1020 55%);color:var(--text)}
+.wrap{max-width:1050px;margin:auto;padding:22px}.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.brand{font-weight:850;font-size:1.35rem;letter-spacing:.3px}.brand span{color:#a998ff}.tag{border:1px solid var(--line);color:var(--muted);padding:8px 12px;border-radius:999px;font-size:.85rem}
+.hero{padding:66px 0 38px;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}.eyebrow{color:var(--accent2);font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:1.5px}h1{font-size:clamp(2.4rem,7vw,4.7rem);line-height:1.04;letter-spacing:-2px;margin:14px 0}p{color:var(--muted);line-height:1.7}.btn{display:inline-block;border:0;border-radius:12px;background:linear-gradient(120deg,var(--accent),#a45cff);color:white;text-decoration:none;padding:13px 18px;font-weight:750;cursor:pointer}.btn.secondary{background:transparent;border:1px solid var(--line);margin-left:8px}.hero-card,.card,.order{background:rgba(18,26,48,.88);border:1px solid var(--line);border-radius:20px;padding:22px}.stat{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:14px 0}.stat:last-child{border:0}.stat strong{color:white}.section-title{font-size:1.8rem;margin:34px 0 8px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0 35px}.card h3{margin:8px 0}.emoji{font-size:1.7rem}.order{display:grid;grid-template-columns:1fr 1fr;gap:14px}.order label{display:block;color:var(--muted);font-size:.9rem;margin-bottom:7px}.order input,.order select,.order textarea{width:100%;background:#0b1225;border:1px solid var(--line);border-radius:10px;padding:12px;color:var(--text);font:inherit}.order .full{grid-column:1/-1}.note{font-size:.88rem;background:#101a2d;border:1px solid var(--line);padding:12px;border-radius:12px;color:var(--muted)}footer{border-top:1px solid var(--line);margin-top:45px;padding:24px 0;color:var(--muted);font-size:.9rem}
+@media(max-width:720px){.hero{grid-template-columns:1fr;padding-top:42px}.grid{grid-template-columns:1fr}.order{grid-template-columns:1fr}.order .full{grid-column:auto}.btn.secondary{margin:10px 0 0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav"><div class="brand">IG<span>FOLLOW</span></div><div class="tag">Social Media Growth Partner</div></nav>
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Simple • Helpful • Mobile friendly</div>
+        <h1>Grow your social presence with <span style="color:#a998ff">IGFollow.</span></h1>
+        <p>Explore social media marketing services and send an order request. Our team will confirm availability and pricing before processing.</p>
+        <a class="btn" href="#order">Request an order</a>
+        <a class="btn secondary" href="#services">View services</a>
+      </div>
+      <div class="hero-card">
+        <div class="eyebrow">Welcome to IGFollow</div>
+        <h2>Your social media, one place.</h2>
+        <p>This is the starter website. Connect your official support channel and configure real order processing before accepting payments.</p>
+        <div class="stat"><span>Platforms</span><strong>Instagram • Facebook</strong></div>
+        <div class="stat"><span>Order handling</span><strong>Request-based demo</strong></div>
+        <div class="stat"><span>Support</span><strong>Contact admin</strong></div>
+      </div>
+    </section>
+    <section id="services">
+      <h2 class="section-title">Popular service categories</h2>
+      <p>These are sample categories only. Add confirmed services and prices after checking your provider.</p>
+      <div class="grid">
+        <article class="card"><div class="emoji">📸</div><h3>Instagram</h3><p>Profile and content promotion services.</p></article>
+        <article class="card"><div class="emoji">👍</div><h3>Facebook</h3><p>Page and post promotion services.</p></article>
+        <article class="card"><div class="emoji">▶️</div><h3>YouTube</h3><p>Video and channel promotion services.</p></article>
+      </div>
+    </section>
+    <section id="order">
+      <h2 class="section-title">Order request</h2>
+      <p>Demo form only: it does not send an order or take payment yet.</p>
+      <form class="order" id="orderForm">
+        <div><label for="platform">Platform</label><select id="platform" required><option value="">Choose platform</option><option>Instagram</option><option>Facebook</option><option>YouTube</option><option>TikTok</option><option>Other</option></select></div>
+        <div><label for="service">Service requested</label><input id="service" required placeholder="e.g. post promotion"></div>
+        <div class="full"><label for="link">Public profile/post URL</label><input id="link" type="url" required placeholder="https://..."></div>
+        <div><label for="quantity">Quantity (if applicable)</label><input id="quantity" type="number" min="1" placeholder="e.g. 100"></div>
+        <div><label for="contact">Your Telegram username or contact</label><input id="contact" required placeholder="@username"></div>
+        <div class="full"><button class="btn" type="submit">Prepare request</button></div>
+        <div class="full"><div class="note" id="result">Do not enter passwords or payment-card details. This demo does not submit data to a server.</div></div>
+      </form>
+    </section>
+  </main>
+  <footer>© <span id="year"></span> IGFollow. Replace this starter content with your verified services, policies and official support details.</footer>
+</div>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('orderForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const data = {
+    platform: document.getElementById('platform').value,
+    service: document.getElementById('service').value,
+    link: document.getElementById('link').value,
+    quantity: document.getElementById('quantity').value || 'Not specified',
+    contact: document.getElementById('contact').value
+  };
+  document.getElementById('result').textContent =
+    'Demo request prepared on this device only — not sent. Platform: ' + data.platform +
+    '; Service: ' + data.service + '; Quantity: ' + data.quantity +
+    '. Set up a secure backend before accepting real orders.';
+});
+</script>
+</body>
+</html>
