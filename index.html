@@ -72,5 +72,12 @@ $("#close").onclick=closeOrder;$("#cancel").onclick=closeOrder;$("#backdrop").on
 $("#qty").oninput=()=>{if(selected)$("#estimate").value=money(selected.price*Number($("#qty").value||0)/1000);};
 $("#orderForm").onsubmit=e=>{e.preventDefault();if(!selected)return;let link=$("#target").value.trim(),q=Number($("#qty").value);if(!/^https?:\/\/\S+/i.test(link)){toast(tr("badUrl"));return;}if(!Number.isInteger(q)||q<selected.min||q>selected.max){toast(tr("qtyError").replace("{min}",selected.min).replace("{max}",selected.max));return;}closeOrder();toast(tr("orderReady"));};
 $("#year").textContent=new Date().getFullYear();translate();
-</script>
+</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </body></html>
+const SUPABASE_URL = "https://ynmmkhppqtuqznzevcnb.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_E4OsKociW9_CS-sbsV1RAQ_zABCv65S";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
