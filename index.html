@@ -50,7 +50,25 @@ const services=[
 {id:"TT-001",cat:"TikTok",icon:"🎵",name:{bn:"TikTok ভিডিও এনগেজমেন্ট",en:"TikTok video engagement"},desc:{bn:"শুধু নমুনা। এখনো সার্ভিস ডেলিভারি যুক্ত নেই।",en:"Sample only. No delivery is connected yet."},price:.70,min:100,max:20000},
 {id:"IG-002",cat:"Instagram",icon:"✨",name:{bn:"Instagram স্টোরি রিচ",en:"Instagram story reach"},desc:{bn:"ফিল্টার ও সর্টিং দেখানোর জন্য নমুনা।",en:"Placeholder to demonstrate filtering and sorting."},price:.65,min:100,max:10000},
 {id:"FB-002",cat:"Facebook",icon:"👍",name:{bn:"Facebook পোস্ট রিঅ্যাকশন",en:"Facebook post reactions"},desc:{bn:"অর্ডার নেওয়ার আগে প্রকৃত প্রোভাইডারের তথ্য যোগ করুন।",en:"Add verified provider details before accepting orders."},price:1,min:50,max:10000}
-];
+];async function loadSupabaseServices() {
+  const { data, error } = await supabaseClient
+    .from("services")
+    .select("id,name,platform,description,price_per_1000,minimum_quantity,max_quantity,active")
+    .eq("active", true)
+    .order("id");
+
+  if (error) {
+    console.error("Supabase service load failed:", error.message);
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    console.log("এখনো কোনো active service নেই।");
+    return;
+  }
+
+  console.log("Supabase services loaded:", data);
+}
 const words={
 bn:{navHome:"হোম",navServices:"সার্ভিস",navFeatures:"ফিচার",navAbout:"আমাদের সম্পর্কে",login:"লগইন",explore:"সার্ভিস দেখুন",eyebrow:"আপনার সোশ্যাল গ্রোথ শুরু হোক এখানে",hero1:"সোশ্যাল মিডিয়ায়",hero2:"আরও স্মার্টভাবে এগিয়ে যান।",heroCopy:"এক জায়গায় সোশ্যাল মিডিয়া সার্ভিস খুঁজুন। ক্যাটালগ দেখুন, সার্ভিসের তথ্য তুলনা করুন এবং কয়েক ক্লিকেই অর্ডারের তথ্য প্রস্তুত করুন।",browse:"সার্ভিস দেখুন",learn:"আরও জানুন",trust1:"মোবাইল-ফ্রেন্ডলি",trust2:"পরিষ্কার সার্ভিস তথ্য",trust3:"সম্প্রসারণের উপযোগী",preview:"আপনার প্যানেলের প্রিভিউ",previewSub:"ভবিষ্যৎ ড্যাশবোর্ডের একটি নমুনা",demo:"নমুনা",sampleServices:"নমুনা সার্ভিস",catalogPreview:"ক্যাটালগ প্রিভিউ",platforms:"প্ল্যাটফর্ম",networks:"জনপ্রিয় নেটওয়ার্ক",catalog:"সার্ভিস ক্যাটালগ",catalogTitle:"আপনার পছন্দের সার্ভিস খুঁজুন",catalogSub:"সার্ভিস সার্চ ও ফিল্টার করুন। প্রকৃত প্রোভাইডারের যাচাইকৃত তথ্য যোগ না করা পর্যন্ত সার্ভিস ও দাম শুধু উদাহরণ।",search:"সার্ভিস খুঁজুন...",sortFeatured:"সাজানো: ফিচারড",sortLow:"দাম: কম থেকে বেশি",sortHigh:"দাম: বেশি থেকে কম",sortName:"নাম: A–Z",all:"সব সার্ভিস",why:"সহজ ব্যবহারের জন্য",featuresTitle:"সার্ভিস পরিচালনার সহজ উপায়",featuresSub:"একটি পরিচ্ছন্ন ভিত্তি, যা পরে পূর্ণাঙ্গ প্যানেলে রূপান্তর করা যাবে।",f1:"দ্রুত খুঁজুন",f1p:"প্ল্যাটফর্ম, সার্ভিসের নাম বা শব্দ দিয়ে দ্রুত সার্ভিস খুঁজুন।",f2:"সব ডিভাইসে উপযোগী",f2p:"Android ফোন, ট্যাবলেট ও কম্পিউটারে স্বাচ্ছন্দ্যে ব্যবহার করুন।",f3:"API যুক্ত করার উপযোগী",f3p:"নমুনা ডেটা এক জায়গায় রাখা হয়েছে, পরে Backend বা Provider API দিয়ে বদলানো যাবে।",ctaTitle:"IGFollow ব্যবহার শুরু করবেন?",ctaCopy:"প্রথমে সার্ভিস ক্যাটালগ। পরবর্তী ধাপে অ্যাকাউন্ট, পেমেন্ট ও স্বয়ংক্রিয় অর্ডার যোগ করা যাবে।",ctaButton:"ক্যাটালগ দেখুন →",footer:"স্মার্ট সোশ্যাল ওয়ার্কফ্লোর জন্য তৈরি।",modalTitle:"অর্ডারের তথ্য প্রস্তুত করুন",modalNote:"এটি Frontend Demo। এখনো অর্ডার জমা বা টাকা কাটা হয় না।",fieldService:"সার্ভিস",fieldLink:"টার্গেট লিংক",fieldQty:"পরিমাণ",fieldEstimate:"আনুমানিক মোট (USD)",cancel:"বাতিল",prepare:"অর্ডারের তথ্য তৈরি করুন",sample:"নমুনা",per:"/ ১,০০০",min:"সর্বনিম্ন",max:"সর্বোচ্চ",noResults:"মিল পাওয়া যায়নি। অন্যভাবে সার্চ করুন।",badUrl:"http:// বা https:// দিয়ে শুরু হওয়া সঠিক URL দিন।",qtyError:"পরিমাণ {min} থেকে {max}-এর মধ্যে হতে হবে।",orderReady:"ডেমো: তথ্য প্রস্তুত হয়েছে, কিন্তু অর্ডার জমা হয়নি এবং টাকা কাটা হয়নি।",loginDemo:"নিরাপদ Backend যুক্ত হলে লগইন চালু করা হবে।"},
 en:{navHome:"Home",navServices:"Services",navFeatures:"Features",navAbout:"About",login:"Log in",explore:"Explore services",eyebrow:"Your social growth starts here",hero1:"Grow your social",hero2:"presence smarter.",heroCopy:"Discover social media services in one place. Browse the catalog, compare service details, and prepare order details in a few clicks.",browse:"Browse services",learn:"Learn more",trust1:"Mobile friendly",trust2:"Clear service details",trust3:"Ready to expand",preview:"Your panel preview",previewSub:"A sample of your future dashboard",demo:"DEMO",sampleServices:"Sample services",catalogPreview:"Catalog preview",platforms:"Platforms",networks:"Popular networks",catalog:"Service catalog",catalogTitle:"Find the right service",catalogSub:"Search and filter sample services. Listings and prices are placeholders until verified provider data is added.",search:"Search services...",sortFeatured:"Sort: Featured",sortLow:"Price: Low to high",sortHigh:"Price: High to low",sortName:"Name: A–Z",all:"All services",why:"Built for clarity",featuresTitle:"A simpler way to manage services",featuresSub:"A clean foundation that can grow into a full panel.",f1:"Quick discovery",f1p:"Search by platform, service name, or keyword.",f2:"Responsive layout",f2p:"Comfortable to use on Android phones, tablets, and desktops.",f3:"API-ready structure",f3p:"Sample data is centralized so a backend or provider API can replace it later.",ctaTitle:"Ready to explore IGFollow?",ctaCopy:"Start with the catalog. Accounts, payments, and automated ordering can be added in later phases.",ctaButton:"View catalog →",footer:"Built for a smarter social workflow.",modalTitle:"Prepare order details",modalNote:"This is a front-end demo. No order is submitted and no money is charged.",fieldService:"Service",fieldLink:"Target URL",fieldQty:"Quantity",fieldEstimate:"Estimated total (USD)",cancel:"Cancel",prepare:"Prepare order details",sample:"Sample",per:"/ 1,000",min:"Min",max:"Max",noResults:"No matching services. Try another search.",badUrl:"Enter a valid URL starting with http:// or https://.",qtyError:"Quantity must be between {min} and {max}.",orderReady:"Demo only: details prepared, but no order was submitted and no money was charged.",loginDemo:"Login will be enabled after a secure backend is connected."}
@@ -72,7 +90,7 @@ $("#close").onclick=closeOrder;$("#cancel").onclick=closeOrder;$("#backdrop").on
 $("#qty").oninput=()=>{if(selected)$("#estimate").value=money(selected.price*Number($("#qty").value||0)/1000);};
 $("#orderForm").onsubmit=e=>{e.preventDefault();if(!selected)return;let link=$("#target").value.trim(),q=Number($("#qty").value);if(!/^https?:\/\/\S+/i.test(link)){toast(tr("badUrl"));return;}if(!Number.isInteger(q)||q<selected.min||q>selected.max){toast(tr("qtyError").replace("{min}",selected.min).replace("{max}",selected.max));return;}closeOrder();toast(tr("orderReady"));};
 $("#year").textContent=new Date().getFullYear();translate();
-</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">loadSupabaseServices();</script>
 </body></html>
 const SUPABASE_URL = "https://ynmmkhppqtuqznzevcnb.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_E4OsKociW9_CS-sbsV1RAQ_zABCv65S";
