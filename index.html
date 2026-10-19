@@ -53,7 +53,7 @@ const services=[
 ];async function loadSupabaseServices() {
   const { data, error } = await supabaseClient
     .from("services")
-    .select("id,name,platform,description,price_per_1000,minimum_quantity,max_quantity,active")
+    .select("id,name,platform,description,price_per_1000,min_quantity,max_quantity,active")
     .eq("active", true)
     .order("id");
 
